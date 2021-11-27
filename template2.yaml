@@ -20,10 +20,8 @@ spec:
       rego: |
         package k8sazurepodenforcelabels
 
-        violation[{"msg": msg, "details": {"missing_labels": missing}}] {
-          required := {label | label := input.parameters.labels[_]}
-          provided := {label | input.review.object.metadata.labels[label]}
-          missing := required - provided
-          count(missing) > 0
-          msg := sprintf("you must provide labels: %v", [missing])
+        violation[{"msg": msg] {
+          required := {namespace | namespace := input.parameters.namespaces[_]}
+          not input.request.object.metadata.namespace.required
+          msg := sprintf("calico-system is missing")
         }
