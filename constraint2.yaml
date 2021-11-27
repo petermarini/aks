@@ -8,4 +8,4 @@ spec:
       - apiGroups: [""]
         kinds: ["*"]
   parameters:
-    namespace: {{ .Values.namespaces }}
+    namespaces: {{ .Values.namespaces }}
