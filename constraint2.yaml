@@ -9,4 +9,4 @@ spec:
         kinds: ["*"]
   parameters:
     namespaces: 
-      -"calico-system"
+      - "calico-system"
