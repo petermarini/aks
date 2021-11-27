@@ -6,6 +6,6 @@ spec:
   match:
     kinds:
       - apiGroups: [""]
-        kinds: ["Pod"]
+        kinds: ["*"]
   parameters:
-    labels: {{ .Values.labels }}
+    namespace: {{ .Values.namespaces }}
