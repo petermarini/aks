@@ -11,7 +11,7 @@ spec:
         # Schema for the `parameters` field
         openAPIV3Schema:
           properties:
-            labels:
+            namespaces:
               type: array
               items:
                 type: string
@@ -21,7 +21,7 @@ spec:
         package k8sazurepodenforcelabels
 
         violation[{"msg": msg] {
-          required := {namespace | namespace := input.parameters.namespaces[_]}
+          required := input.parameters.namespaces[_]          
           not input.request.object.metadata.namespace.required
           msg := sprintf("calico-system is missing")
         }
