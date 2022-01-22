@@ -1,29 +1,20 @@
 apiVersion: templates.gatekeeper.sh/v1beta1
 kind: ConstraintTemplate
 metadata:
-  name: k8sNamespaceExists
+  name: k8sClusterwidePolicy
 spec:
   crd:
     spec:
       names:
-        kind: K8sNamespaceExists
-      validation:
-        # Schema for the `parameters` field
-        openAPIV3Schema:
-          properties:
-            namespace:
-              type: array
-              items:
-                type: string
+        kind: K8sClusterwidePolicy
+
   targets:
     - target: admission.k8s.gatekeeper.sh
       rego: |
-        package k8sNamespaceExists
-        
+        package k8sClusterwidePolicy
+
         violation[msg] {
-          required := {namespace | namespace := input.parameters.namespace[_]}
-          provided := {namespace | input.review.object.metadata.name[namespace]}
-          result := provided - required
-          count(result) == count(provided)
-          msg := ("Tigera namespace is missing")
+          name = input.review.object.metadata.name
+          contains(input.review.object.spec.namespaceSelector, "all()")
+          msg = sprintf("Warning %s uses a cluster-wide network policy", [name])
         }
