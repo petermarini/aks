@@ -20,10 +20,10 @@ spec:
       rego: |
         package k8sNamespaceExists
         
-        violation[{"msg": msg, "details": {"missing_namespace": missing}}] {
+        violation[msg] {
           required := {namespace | namespace := input.parameters.namespace[_]}
-          provided := {namespace | input.review.object.metadata.namespace[namespace]}
-          missing := required - provided
-          count(missing) > 0
-          msg := sprintf("Tigera namespace is missing: %v", [missing])
+          provided := {namespace | input.review.object.metadata.name[namespace]}
+          result := provided - required
+          count(result) == count(provided)
+          msg := ("Tigera namespace is missing")
         }
