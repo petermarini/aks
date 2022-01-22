@@ -14,7 +14,7 @@ spec:
         package k8sClusterwidePolicy
 
         violation[msg] {
-          name = input.review.object.metadata.name
+          name := input.review.object.metadata.name
           contains(input.review.object.spec.namespaceSelector, "all()")
-          msg = sprintf("Warning %s uses a cluster-wide network policy", [name])
+          msg := sprintf("Warning %s uses a cluster-wide network policy", [name])
         }
