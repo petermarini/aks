@@ -1,0 +1,23 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8sNamespaceExists
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sNamespaceExists
+      validation:
+        # Schema for the `parameters` field
+        openAPIV3Schema:
+          properties
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sNamespaceExists
+        
+        violation[{"msg": msg, "details": {}}] {
+          value := input.review.object.metadata.namespace
+          not value == "tigera-system"
+          msg := sprintf("Namespace tigera-system should exist: %v", [value])
+        }
