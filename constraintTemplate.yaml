@@ -10,7 +10,6 @@ spec:
       validation:
         # Schema for the `parameters` field
         openAPIV3Schema:
-          properties:
   targets:
     - target: admission.k8s.gatekeeper.sh
       rego: |
