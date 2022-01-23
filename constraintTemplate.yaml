@@ -1,13 +1,15 @@
 apiVersion: templates.gatekeeper.sh/v1beta1
 kind: ConstraintTemplate
 metadata:
-  name: k8sclusterwidePolicy
+  name: k8sclusterwidepolicy
 spec:
   crd:
     spec:
       names:
-        kind: K8sClusterwidePolicy
-
+        kind: K8sClusterWidePolicy
+      validation:
+        # Schema for the `parameters` field
+        openAPIV3Schema:
   targets:
     - target: admission.k8s.gatekeeper.sh
       rego: |
