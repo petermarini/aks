@@ -13,7 +13,7 @@ spec:
       rego: |
         package k8sclusterwidepolicy
         
-        violation[{"msg:msg}] {
+        violation[{"msg":msg}] {
           input.review.object.metadata.namespace == "tigera-system"
           msg := "Warning there is a cluster-wide network policy"
         }
