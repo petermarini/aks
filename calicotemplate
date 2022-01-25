@@ -7,18 +7,13 @@ spec:
     spec:
       names:
         kind: K8sClusterWidePolicy
-      validation:
-        openAPIV3Schema:
-          properties:
-            namespace:
-              type: string
+
   targets:
     - target: admission.k8s.gatekeeper.sh
       rego: |
         package k8sclusterwidepolicy
         
         violation[msg] {
-          value := input.review.object.metadata.namespace
-          value == "tigera-system"
+          input.review.object.metadata.namespace == "tigera-system"
           msg := "Warning there is a cluster-wide network policy"
         }
