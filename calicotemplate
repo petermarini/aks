@@ -13,6 +13,6 @@ spec:
         package k8sclusterwidepolicy
         
         violation[msg] {
-          contains(input.review.object.spec.namespaceSelector, "all()")
+          contains(input.review.object.spec.tier, "platform")
           msg := "Warning there is a cluster-wide network policy"
         }
