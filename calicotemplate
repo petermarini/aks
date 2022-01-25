@@ -13,6 +13,6 @@ spec:
         package k8sclusterwidepolicy
         
         violation[msg] {
-          contains(input.review.object.spec.tier, "platform")
+          contains(input.review.object.metadata.name, "tigera")
           msg := "Warning there is a cluster-wide network policy"
         }
