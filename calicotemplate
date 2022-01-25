@@ -12,9 +12,7 @@ spec:
       rego: |
         package k8sclusterwidepolicy
         
-        name := input.review.object.metadata.name
-        
-        deny[msg] {
+        violation[msg] {
           contains(input.review.object.spec.namespaceSelector, "all()")
-          msg := sprintf("Warning %s is a cluster-wide network policy", [name])
+          msg := "Warning there is a cluster-wide network policy"
         }
