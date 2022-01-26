@@ -14,7 +14,6 @@ spec:
         package k8spetercustompolicy
         
         violation[{"msg":msg}] {
-          value := input.review.object.metadata.namespace
-          startswith (value, "tigera")
+          startswith (input.review.object.metadata.namespace, "tigera")
           msg := "Warning there is a cluster-wide network policy"
         }
