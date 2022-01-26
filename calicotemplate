@@ -15,6 +15,6 @@ spec:
         
         violation[{"msg":msg}] {
           value := input.review.object.namespace
-          startwith (value, "tigera")
+          startswith (value, "tigera")
           msg := "Warning there is a cluster-wide network policy"
         }
