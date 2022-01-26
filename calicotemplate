@@ -16,7 +16,7 @@ spec:
         name := input.review.object.metadata.name
         
         violation[{"msg":msg}] {
-          value := input.review.object.spec.namespaceSelector
-          value == "all()"
+          value := input.review.object.spec.name
+          value == "security.block-threatfeed"
           msg := sprintf("Warning %s is a cluster-wide network policy", [name])
         }
