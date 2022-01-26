@@ -14,7 +14,7 @@ spec:
         package k8sclusterwidepolicy
         
         violation[{"msg":msg}] {
-          value := input.review.object.namespace
+          value := input.review.object.metadata.namespace
           startswith (value, "tigera")
           msg := "Warning there is a cluster-wide network policy"
         }
