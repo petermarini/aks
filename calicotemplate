@@ -13,8 +13,10 @@ spec:
       rego: |
         package k8spetercustompolicy
         
+        name := input.review.object.metadata.name
+        
         violation[{"msg":msg}] {
           namespace := input.review.object.metadata.namespace
           namespace == "tigera-system"
-          msg := "Warning there is a cluster-wide network policy"
+          msg := sprintf("Warning %s is a cluster-wide network policy", [name])
         }
