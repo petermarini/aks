@@ -16,7 +16,6 @@ spec:
         name := input.review.object.metadata.name
         
         violation[{"msg":msg}] {
-          namespace := input.review.object.metadata.namespace
-          namespace == "tigera-system"
+          contains(input.review.object.spec.namespaceSelector, "all()")
           msg := sprintf("Warning %s is a cluster-wide network policy", [name])
         }
